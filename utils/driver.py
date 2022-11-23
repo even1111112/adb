@@ -1,6 +1,6 @@
 from configurations import *
 from model.Site import Site
-from model.managers.TransactionManager import TransactionManager
+from model.TransactionManager import TransactionManager
 from model.Operation import OperationParser, OperationCreator
 
 
