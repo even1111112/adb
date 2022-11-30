@@ -1,6 +1,6 @@
+from model.managers.DataManager import DataManager
+from model.managers.LockManager import LockManager
 from copy import deepcopy
-from model.DataManager import DataManager
-from model.LockManager import LockManager
 
 
 class Site(object):
