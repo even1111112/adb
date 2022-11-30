@@ -32,9 +32,9 @@ class Site(object):
 
     def snapshot(self, tick):
         available_data = {}
-        for idx, d in enumerate(self.data_manager.data, start=1):
+        for number, d in enumerate(self.data_manager.data, start=1):
             if self.data_manager.is_accessible[idx] == True and d:
-                available_data[idx] = d
+                available_data[number] = d
         self.snapshots[tick] = deepcopy(available_data)
 
     def get_snapshot_variable(self, tick, var_id):
