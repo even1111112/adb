@@ -2,7 +2,6 @@ from model.managers.DataManager import DataManager
 from model.managers.LockManager import LockManager
 from copy import deepcopy
 
-
 class Site(object):
     def __init__(self, id):
         self.site_id = id
@@ -19,9 +18,9 @@ class Site(object):
 
     def echo(self):
         if self.up == True:
-            prefix = f"Site {self.site_id} ({'up'})"
+            prefix = "site" + str(self.site_id) + "up"
         else:
-            prefix = f"Site {self.site_id} ({'down'})"
+            prefix = "site" + str(self.site_id) + "down"
         a = [prefix]
         for v in self.data_manager.data:
             a = a + [v]
