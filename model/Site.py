@@ -33,7 +33,7 @@ class Site(object):
     def snapshot(self, tick):
         available_data = {}
         for number, d in enumerate(self.data_manager.data, start=1):
-            if self.data_manager.is_accessible[idx] == True and d:
+            if self.data_manager.is_accessible[number - 1] == True and d:
                 available_data[number] = d
         self.snapshots[tick] = deepcopy(available_data)
 
