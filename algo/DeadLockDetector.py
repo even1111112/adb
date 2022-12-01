@@ -82,11 +82,11 @@ class WaitFor(object):
         return self.trace
 
     def remove_transaction(self, transaction_id):
-        for key in self.var_to_ops.keys():
-            new = {}
-            for op in self.var_to_ops[key]:
+        ops = {}
+        for var, ops in self.var_to_ops.items():
+            for op in ops:
                 if op.get_parameters()[0] != transaction_id:
-                    new.add(op)
-            self.var_to_ops[self.var_to_ops[key]] = new
+                    ops.add(op)
+            self.var_to_ops[var] = ops
 
         self.wait_for.pop(transaction_id, None)
