@@ -11,8 +11,8 @@ class WaitFor(object):
         if op_t != "R" and op_t != "W":
             return
 
-        trans_id = operation.get_parameters()[0]
         var_id = operation.get_parameters()[1]
+        trans_id = operation.get_parameters()[0]
 
         if self.tm.transactions[trans_id].is_readonly == True:
             return
