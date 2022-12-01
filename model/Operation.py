@@ -95,10 +95,10 @@ class Read(Operation):
  
             if site.up == True:
               if site.data_manager.check_accessibility(var_id):
-                if site.lock_manager.try_lock_variable(trans_id, var_id_str, 0):
-                    return do_read(trans_id, var_id, site)
-                else:
+                if site.lock_manager.try_lock_variable(trans_id, var_id_str, 0) == False:
                     return False
+                else:
+                    do_read(trans_id, var_id, site)
             else:
               return False
         else:
