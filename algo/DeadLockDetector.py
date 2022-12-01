@@ -65,7 +65,9 @@ class WaitFor(object):
         return False
 
     def check_deadlock(self):
-        nodes = list(self.wait_for.keys())
+        nodes = []
+        for key in self.wait_for.keys():
+          nodes.append(key)
         self.trace = []
 
         for target in nodes:
@@ -80,11 +82,11 @@ class WaitFor(object):
         return self.trace
 
     def remove_transaction(self, transaction_id):
-        for var, ops in self.var_to_ops.items():
-            ops = {}
-            for op in ops:
+        for key in self.var_to_ops.keys():
+            new = {}
+            for op in self.var_to_ops[key]:
                 if op.get_parameters()[0] != transaction_id:
-                    ops.add(op)
-            self.var_to_ops[var] = ops
+                    new.add(op)
+            self.var_to_ops[self.var_to_ops[key]] = new
 
         self.wait_for.pop(transaction_id, None)
