@@ -12,6 +12,5 @@ class Transaction(object):
         self.operations.append(operation)
 
     def __str__(self):
-        return f"Identifier: {self.transaction_id} & ReadOnly: {self.is_readonly} & " \
-               f"Operations: {[str(op) for op in self.operations]}"
+        return "Identifier:" + str(self.transaction_id) + "& ReadOnly:" + str(self.is_readonly) +"& Operations: " +str([str(op) for op in self.operations])
 
