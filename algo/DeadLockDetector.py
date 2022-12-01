@@ -83,7 +83,7 @@ class WaitFor(object):
 
     def remove_transaction(self, transaction_id):
         ops = {}
-        for var, ops in self.var_to_ops.items():
+        for var in self.var_to_ops.keys():
             for op in ops:
                 if op.get_parameters()[0] != transaction_id:
                     ops.add(op)
