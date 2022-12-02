@@ -104,7 +104,7 @@ class Read(Operation):
             else:
               return False
         else:
-            new_id = var_id % number_of_sites + 1
+            new_id = var_id % 10 + 1
             site = tm.get_site(new_id)
             for i in range(len(tm.sites)):
                 if tm.sites[i].up == False:
