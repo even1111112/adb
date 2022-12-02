@@ -128,7 +128,7 @@ class Write(Operation):
         _, var_id = parse_variable_id(var_id_str)
 
         if var_id % 2 == 1:
-            site = tm.get_site(var_id % number_of_sites + 1)
+            site = tm.get_site(var_id % 10 + 1)
             if site.up == True and site.lock_manager.try_lock_variable(trans_id, var_id_str, 1):
                 logs = site.data_manager.log.get(trans_id, {})
                 logs[var_id] = write_value
