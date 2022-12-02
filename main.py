@@ -1,5 +1,5 @@
 from utils.FileLoader import FileLoader
-from utils.driver import run, run_interactive
+from utils.driver import run
 import argparse
 import sys
 import os
