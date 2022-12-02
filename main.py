@@ -15,11 +15,6 @@ def run_file(input_file, output_file):
             run(loader.next_case())
             case_id = case_id + 1
 
-
-def runi():
-    run_interactive()
-
-
 def runf(input, output):
     run_file(input, output)
 
@@ -39,15 +34,9 @@ def rund(input, output):
             run_file(input_file, output_file)
 
 
-rundict = {
-    "i": runi,
-    "f": runf,
-    "d": rund
-}
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("RepCRec")
-    parser.add_argument("mode", type=str, help="program mode (f/d/i), 'i' represents interactive mode")
+    parser.add_argument("mode", type=str, help="program mode (f/d)")
     parser.add_argument("-input", type=str, help="input source")
     parser.add_argument("-output", type=str, help="output source")
     args = parser.parse_args()
@@ -55,7 +44,12 @@ if __name__ == "__main__":
     mode = args.mode
     input_src = args.input
     output_src = args.output
+    rundict = {
+        "f": runf(input_src, output_src),
+        "d": rund(input_src, output_src)
+    }
 
     fun = rundict.get(mode)
     fun()
+
 
