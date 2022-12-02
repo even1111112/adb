@@ -61,7 +61,7 @@ class Read(Operation):
             trans_start_tick = tm.transactions[trans_id].tick
 
             if var_id % 2 == 1:
-                site = tm.get_site(var_id % number_of_sites + 1)
+                site = tm.get_site(var_id % 10 + 1)
                 if site.up == True:
                   if var_id in site.snapshots[trans_start_tick]:
                     if var_id in site.snapshots[trans_start_tick]:
@@ -71,7 +71,7 @@ class Read(Operation):
                   return False
 
             elif var_id % 2 == 1:
-                new_id = var_id % number_of_sites + 1
+                new_id = var_id % 10 + 1
                 site = tm.get_site(new_id)
     
                 if site.up == True:
