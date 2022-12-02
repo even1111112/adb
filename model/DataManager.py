@@ -1,16 +1,12 @@
-from configurations import distinct_variable_counts, number_of_sites
-
-
-
 class DataManager(object):
 
     @staticmethod
     def _init_db(idx):
 
-        data = [None] * distinct_variable_counts
+        data = [None] * 20
 
-        for i in range(distinct_variable_counts):
-            if i % 2 or (i + 1) % number_of_sites + 1 == idx:
+        for i in range(20):
+            if i % 2 or (i + 1) % 10 + 1 == idx:
                 data[i] = 10 * (i + 1)
         return data
 
@@ -39,8 +35,8 @@ class DataManager(object):
 
     def disable_accessibility(self):
 
-        for i in range(distinct_variable_counts):
-            if i % 2 == 0 and (i + 1) % number_of_sites + 1 == self.site_id:
+        for i in range(20):
+            if i % 2 == 0 and (i + 1) % 10 + 1 == self.site_id:
                 self.is_accessible[i] = True
             else:
                 self.is_accessible[i] = False
