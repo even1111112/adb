@@ -15,10 +15,10 @@ class Operation(object):
     def save_to_transaction(self, tm):
         length = len(self.para)
         if length == 0:
-            raise TypeError("Try to append dump operation to transaction")
+            raise TypeError("Try to add dump to the transaction")
 
         if self.para[0] in tm.transactions is False:
-            raise KeyError(f"Try to execute {self.op_t} in a non-existing transaction")
+            raise KeyError(f"Try to execute {self.op_t} in a transaction which is not exist")
 
         tm.transactions[self.para[0]].add_operation(self)
         tm.wait_for_graph.add_operation(self)
@@ -49,5 +49,5 @@ def do_read(trans_id, var_id, site):
         res = site.data_manager.get_variable(var_id)
     else:
         res = site.data_manager.log[trans_id][var_id]
-    print_result(["Transaction", "Site", f"x{var_id}"], [[trans_id, f"{site.site_id}", res]])
+    print_result(["trans", "site", f"x{var_id}"], [[trans_id, f"{site.site_id}", res]])
     return True
