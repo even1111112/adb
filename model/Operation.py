@@ -2,10 +2,9 @@ import re
 
 from . import Operation, print_result, parse_variable_id, do_read
 from model.Transaction import Transaction
-from configurations import *
 
 TABLE_HEADERS = ["Site Name"] 
-for i in range(distinct_variable_counts):
+for i in range(20):
   TABLE_HEADERS.append("x"+str(i+1))
 
 class OperationParser(object):
