@@ -1,4 +1,5 @@
 import re
+
 from . import Operation, print_result, parse_variable_id, do_read
 from model.Transaction import Transaction
 from configurations import *
@@ -83,6 +84,8 @@ class Read(Operation):
                 else:
                   return False
             else:
+                new_id = var_id % number_of_sites + 1
+                site = tm.get_site(new_id)
                 for i in range(len(tm.sites)):
                     if tm.sites[i].up == False:
                         continue
@@ -102,6 +105,8 @@ class Read(Operation):
             else:
               return False
         else:
+            new_id = var_id % number_of_sites + 1
+            site = tm.get_site(new_id)
             for i in range(len(tm.sites)):
                 if tm.sites[i].up == False:
                     continue
@@ -140,8 +145,8 @@ class Write(Operation):
                   if site.lock_manager.try_lock_variable(trans_id, var_id_str, 1):
                     locked_sites.append(site)
                   else:
-                    for i in range(len(locked_sites)):
-                      locked_sites[i].try_unlock_variable(var_id_str, trans_id)
+                    for j in range(len(locked_sites)):
+                      locked_sites[j].lock_manager.try_unlock_variable(var_id_str, trans_id)
                     return False
                 else:
                   continue
@@ -176,8 +181,8 @@ class Fail(Operation):
     def execute(self, tick: int, tm, retry=False):
         site = tm.get_site(int(self.para[0]))
         transactions = site.lock_manager.get_involved_transactions()
-        for i in range(len(transactions)):
-            tm.transactions[transactions[i]].to_be_aborted = True
+        for t in transactions:
+            tm.transactions[t].to_be_aborted = True
         site.fail()
         return True
 
