@@ -16,7 +16,7 @@ class TransactionManager(object):
             if not operation.execute(tick, self, True):
                 operations.append(operation)
 
-                if operation.get_op_t() != "end" or operation.get_parameters()[0] not in tx_b:
+                if operation.get_op_t() != "end" or operation.get_parameters()[0] not in trans:
                   trans.append(operation.get_parameters()[0])
 
         self.blocked = operations
