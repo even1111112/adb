@@ -45,7 +45,7 @@ def print_result(headers, rows):
 
 
 def do_read(trans_id, var_id, site):
-    if (var_id not in site.data_manager.log[trans_id]) or (trans_id not in site.data_manager.log):
+    if (trans_id not in site.data_manager.log) or (var_id not in site.data_manager.log[trans_id]):
         res = site.data_manager.get_variable(var_id)
     else:
         res = site.data_manager.log[trans_id][var_id]
