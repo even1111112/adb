@@ -81,12 +81,8 @@ class WaitFor(object):
     def get_trace(self):
         return self.trace
 
-    def remove_transaction(self, transaction_id):
-        ops = {}
-        for var in self.var_to_ops.keys():
-            for op in ops:
-                if op.get_parameters()[0] != transaction_id:
-                    ops.add(op)
+        def remove_transaction(self, transaction_id):
+        for var, ops in self.var_to_ops.items():
+            ops = {op for op in ops if op.get_parameters()[0] != transaction_id}
             self.var_to_ops[var] = ops
-
         self.wait_for.pop(transaction_id, None)
