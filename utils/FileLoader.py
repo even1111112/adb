@@ -1,14 +1,14 @@
 class FileLoader(object):
 
     def __init__(self, file_name):
-        self._lines = []
+        self.lines = []
         self._buffer_idx = -1
 
         line_count = 0
         with open(file_name, 'r') as filename:         
             for line in filename.readlines():
                 if line[:2] != "//":  
-                    self._lines.append(line.strip())
+                    self.lines.append(line.strip())
                     line_count += 1
 
         self._end_idx = line_count - 1
@@ -17,7 +17,7 @@ class FileLoader(object):
     def next_case(self):
 
         res = []
-        for line in self._lines[self._buffer_idx + 1:]:
+        for line in self.lines[self._buffer_idx + 1:]:
             self._buffer_idx += 1
             stripped = line.strip()
             if stripped != ('' or "<END>"):
