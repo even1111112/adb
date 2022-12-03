@@ -1,6 +1,3 @@
-from prettytable import PrettyTable
-
-
 class Operation(object):
     def __init__(self, para: [str]):
         self.para = para
@@ -36,18 +33,10 @@ def parse_variable_id(variable_id):
             return variable_id[:(num - 1)], int(variable_id[(num - 1):])
 
 
-def print_result(headers, rows):
-    prettyTable = PrettyTable()
-    prettyTable.field_names = headers
-    for i in range(len(rows)):
-        prettyTable.add_row(rows[i])
-    print(prettyTable)
-
-
 def do_read(trans_id, var_id, site):
     if (trans_id not in site.data_manager.log) or (var_id not in site.data_manager.log[trans_id]):
-        res = site.data_manager.get_variable(var_id)
+        ans = site.data_manager.get_variable(var_id)
     else:
-        res = site.data_manager.log[trans_id][var_id]
-    print_result(["Transaction", "Site", "x"+str(var_id)], [[trans_id, str(site.site_id), res]])
+        ans = site.data_manager.log[trans_id][var_id]
+    print_result(["Transaction", "Site", "x"+str(var_id)], [[trans_id, str(site.site_id), ans]])
     return True
