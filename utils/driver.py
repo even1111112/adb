@@ -1,4 +1,4 @@
-from model.Site import Site
+from model import Site
 from model.managers.TransactionManager import TransactionManager
 from model.Operation import OperationParser, OperationCreator
 
