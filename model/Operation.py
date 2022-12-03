@@ -68,7 +68,7 @@ class Read(Operation):
                 if site.up == True:
                   if var_id in site.snapshots[trans_start_tick]:
                     if var_id in site.snapshots[trans_start_tick]:
-                      print(tabulate(["Transaction", "Site", var_id_str], [[trans_id, str(site.site_id), str(site.get_snapshot_variable(trans_start_tick, var_id))]]))
+                      print(tabulate([[trans_id, str(site.site_id), str(site.get_snapshot_variable(trans_start_tick, var_id))]], headers = ["Transaction", "Site", var_id_str]))
                       return True
                 else:
                   return False
@@ -176,7 +176,7 @@ class Dump(Operation):
         res = []
         for i in range(len(tm.sites)):
           res.append(tm.sites[i].echo())
-        print(tabulate(TABLE_HEADERS, res))
+        print(tabulate(res, headers = TABLE_HEADERS))
         return True
 
 class Fail(Operation):
