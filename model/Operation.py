@@ -1,5 +1,5 @@
 import re
-from . import Operation, parse_variable_id, do_read
+from . import Operation, do_read
 from model.Transaction import Transaction
 from tabulate import tabulate
 
@@ -55,7 +55,10 @@ class Read(Operation):
             self.save_to_transaction(tm)
 
         trans_id, var_id_str = self.para[0], self.para[1]
-        _, var_id = parse_variable_id(var_id_str)
+        for num, c in enumerate(var_id_str, start=1):
+            if c.isdigit() == True:
+                _, var_id = var_id_str[:(num - 1)], int(var_id_str[(num - 1):])
+                break
 
         if tm.transactions[trans_id].is_readonly == True:
             trans_start_tick = tm.transactions[trans_id].tick
@@ -125,7 +128,11 @@ class Write(Operation):
             self.save_to_transaction(tm)
 
         trans_id, var_id_str, write_value = self.para[0], self.para[1], self.para[2]
-        _, var_id = parse_variable_id(var_id_str)
+        for num, c in enumerate(var_id_str, start=1):
+            if c.isdigit() == True:
+                _, var_id = var_id_str[:(num - 1)], int(var_id_str[(num - 1):])
+                break
+
 
         if var_id % 2 == 1:
             site = tm.get_site(var_id % 10 + 1)
