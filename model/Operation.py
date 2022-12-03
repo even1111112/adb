@@ -1,7 +1,7 @@
 import re
-
 from . import Operation, print_result, parse_variable_id, do_read
 from model.Transaction import Transaction
+from tabulate import tabulate
 
 TABLE_HEADERS = ["Site Name"] 
 for i in range(20):
@@ -65,7 +65,7 @@ class Read(Operation):
                 if site.up == True:
                   if var_id in site.snapshots[trans_start_tick]:
                     if var_id in site.snapshots[trans_start_tick]:
-                      print_result(["Transaction", "Site", var_id_str], [[trans_id, str(site.site_id), str(site.get_snapshot_variable(trans_start_tick, var_id))]])
+                      print(tabulate(["Transaction", "Site", var_id_str], [[trans_id, str(site.site_id), str(site.get_snapshot_variable(trans_start_tick, var_id))]]))
                       return True
                 else:
                   return False
@@ -235,22 +235,12 @@ class End(Operation):
 
 
 class OperationCreator(object):
-    types = {
-        "dump": Dump,
-        "W": Write,
-        "R": Read,
-        "beginRO": BeginRO,
-        "begin": Begin,
-        "end": End,
-        "fail": Fail,
-        "recover": Recover
-    }
-
     @staticmethod
-    def create(op_t, para):
-
-        if op_t in OperationCreator.types:
-          return OperationCreator.types[op_t](para)
+    def create(operation, para):
+        operation_type = {"dump": Dump, "W": Write, "R": Read, "beginRO": BeginRO,
+        "begin": Begin, "end": End, "fail": Fail, "recover": Recover}
+        if operation in operation_type:
+          return operation_type[operation](para)
         else:
           raise KeyError("Type Error")
 
