@@ -1,5 +1,5 @@
 import re
-from . import Operation, print_result, parse_variable_id, do_read
+from . import Operation, parse_variable_id, do_read
 from model.Transaction import Transaction
 from tabulate import tabulate
 
@@ -169,7 +169,7 @@ class Dump(Operation):
         res = []
         for i in range(len(tm.sites)):
           res.append(tm.sites[i].echo())
-        print_result(TABLE_HEADERS, res)
+        print(tabulate(TABLE_HEADERS, res))
         return True
 
 class Fail(Operation):
