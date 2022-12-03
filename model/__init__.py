@@ -29,12 +29,6 @@ class Operation(object):
         return self.op_t
 
 
-def parse_variable_id(variable_id):
-    for num, c in enumerate(variable_id, start=1):
-        if c.isdigit() == True:
-            return variable_id[:(num - 1)], int(variable_id[(num - 1):])
-
-
 def do_read(trans_id, var_id, site):
     if (trans_id not in site.data_manager.log) or (var_id not in site.data_manager.log[trans_id]):
         ans = site.data_manager.get_variable(var_id)
