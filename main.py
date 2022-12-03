@@ -6,8 +6,8 @@ import os
 
 
 def run_file(input_file, output_file):
-    with open(output_file, "w") as file:
-        sys.stdout = file
+    with open(output_file, "w") as f:
+        sys.stdout = f
         loader = FileLoader(input_file)
         case_id = 1
         while loader.has_next() is not None:
@@ -36,9 +36,9 @@ def rund(input, output):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("RepCRec")
-    parser.add_argument("mode", type=str, help="program mode (f/d)")
-    parser.add_argument("-input", type=str, help="input source")
-    parser.add_argument("-output", type=str, help="output source")
+    parser.add_argument("mode", type=str)
+    parser.add_argument("-input", type=str)
+    parser.add_argument("-output", type=str)
     args = parser.parse_args()
 
     mode = args.mode
